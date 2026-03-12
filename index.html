@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farith | Premium Designer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Outfit',sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:#0f0f1a;color:white;overflow-x:hidden;position:relative;}
+
+/* Animated Background */
+.animated-bg{
+position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;
+background:
+radial-gradient(circle at 20% 30%, rgba(108,92,231,0.4), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(0,206,201,0.4), transparent 40%),
+linear-gradient(120deg,#0f0f1a,#1c1c2e,#0f0f1a);
+background-size:200% 200%;
+animation:bgMove 12s ease infinite;
+}
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* Navigation */
+nav{
+display:flex;justify-content:space-between;align-items:center;
+padding:20px 8%;position:fixed;width:100%;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(15px);z-index:1000;
+}
+nav ul{display:flex;gap:30px;list-style:none;}
+nav a{text-decoration:none;color:white;transition:.3s;}
+nav a:hover{color:#00cec9;}
+.menu-toggle{display:none;font-size:28px;cursor:pointer;}
+
+/* Hero Section */
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:180px 8% 120px;
+min-height:100vh;
+}
+.hero-content{max-width:650px;}
+.hero h1{font-size:72px;line-height:1.2;margin-bottom:25px;}
+.hero span.name{
+background:linear-gradient(90deg,#00cec9,#6c5ce7);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.hero-description{font-size:18px;line-height:1.8;opacity:0.9;margin-bottom:35px;}
+.hero-buttons{display:flex;gap:20px;}
+.btn{padding:14px 32px;border-radius:30px;text-decoration:none;font-weight:600;transition:0.3s;}
+.primary-btn{background:linear-gradient(90deg,#00cec9,#6c5ce7);color:white;}
+.primary-btn:hover{transform:scale(1.05);box-shadow:0 0 25px rgba(0,255,255,0.5);}
+.secondary-btn{border:2px solid #00cec9;color:#00cec9;}
+.secondary-btn:hover{background:#00cec9;color:#000;}
+.typing{color:#00cec9;border-right:3px solid #00cec9;padding-right:5px;animation:blink 0.8s infinite;}
+@keyframes blink{
+0%{border-color:#00cec9;}
+50%{border-color:transparent;}
+100%{border-color:#00cec9;}
+}
+.hero-img img{width:420px;}
+
+/* Sections */
+section{padding:120px 8%;}
+.section-title{text-align:center;font-size:42px;margin-bottom:70px;}
+
+/* Grid Layout */
+.services-container,
+.projects-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+/* Cards */
+.service-card,
+.project-card{
+background:rgba(255,255,255,0.05);
+padding:30px;border-radius:20px;
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.1);
+transition:.4s;cursor:pointer;
+text-align:center;
+}
+.project-image{height:200px;margin-bottom:15px;}
+.project-image img{width:100%;height:100%;object-fit:cover;border-radius:15px;}
+.service-card:hover,
+.project-card:hover{
+transform:translateY(-12px) scale(1.04);
+box-shadow:0 0 40px rgba(0,255,255,0.4);
+}
+
+/* Contact */
+.contact-box{
+max-width:600px;margin:auto;
+background:rgba(255,255,255,0.05);
+padding:40px;border-radius:20px;
+text-align:center;
+}
+
+/* Gallery */
+#galleryModal{
+display:none;position:fixed;top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+z-index:2000;overflow:auto;padding:80px 5%;
+}
+#galleryImages{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+#galleryImages img{width:100%;border-radius:15px;}
+
+/* Video Modal */
+#videoModal{
+display:none;position:fixed;
+top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+z-index:3000;
+justify-content:center;align-items:center;
+}
+#videoModal video{width:80%;border-radius:20px;}
+
+/* Mobile */
+@media(max-width:900px){
+.menu-toggle{display:block;}
+nav ul{
+position:absolute;top:70px;left:0;width:100%;
+background:#111;flex-direction:column;
+align-items:center;gap:20px;padding:20px 0;display:none;
+}
+nav ul.active{display:flex;}
+.hero{flex-direction:column;text-align:center;}
+.hero-img img{width:260px;margin-top:40px;}
+.hero-buttons{justify-content:center;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="animated-bg"></div>
+
+<nav>
+<h2>Welcome</h2>
+
+<div class="menu-toggle" id="menu-toggle">☰</div>
+
+<ul id="nav-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+<h1>
+Hi, I'm <span class="name">Farith</span><br>
+<span class="typing"></span>
+</h1>
+
+<p class="hero-description">
+I am a passionate and creative graphic designer specializing in high-impact visual communication.
+From modern logo creation to premium brochures, social media creatives, branding materials,
+and marketing designs — I help businesses stand out with powerful and professional designs.
+</p>
+
+<div class="hero-buttons">
+<a href="#projects" class="btn primary-btn">View My Work</a>
+<a href="#contact" class="btn secondary-btn">Hire Me</a>
+</div>
+
+</div>
+
+<div class="hero-img">
+<img src="images/character.png">
+</div>
+
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+<h2 class="section-title">Services</h2>
+
+<div class="services-container">
+<div class="service-card">Logo Design</div>
+<div class="service-card">Brochure Design</div>
+<div class="service-card">Flyer Design</div>
+<div class="service-card">Social Media Post</div>
+<div class="service-card">Pamphlet Design</div>
+<div class="service-card">Visiting Card</div>
+<div class="service-card">Photo Frame Gifts</div>
+<div class="service-card">Video Editing</div>
+<div class="service-card">Banner Design</div>
+</div>
+
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+<h2 class="section-title">Projects</h2>
+
+<div class="projects-container">
+
+<div class="project-card" onclick="openGallery('logo')">
+<div class="project-image"><img src="images/logo.jpg"></div>
+<h3>Logo Design</h3>
+</div>
+
+<div class="project-card" onclick="openGallery('brochure')">
+<div class="project-image"><img src="images/brochure.jpg"></div>
+<h3>Brochure Design</h3>
+</div>
+
+<div class="project-card" onclick="openGallery('flyer')">
+<div class="project-image"><img src="images/flyer.jpg"></div>
+<h3>Flyer Design</h3>
+</div>
+
+<div class="project-card" onclick="openGallery('social')">
+<div class="project-image"><img src="images/social.jpg"></div>
+<h3>Social Media Post</h3>
+</div>
+
+<div class="project-card" onclick="openGallery('pamphlet')">
+<div class="project-image"><img src="images/pamphlet.jpg"></div>
+<h3>Pamphlet Design</h3>
+</div>
+
+<div class="project-card" onclick="openGallery('visiting')">
+<div class="project-image"><img src="images/visiting.jpg"></div>
+<h3>Visiting Card</h3>
+</div>
+
+<div class="project-card" onclick="openGallery('frame')">
+<div class="project-image"><img src="images/frame.jpg"></div>
+<h3>Photo Frame Gifts</h3>
+</div>
+
+<div class="project-card" onclick="openVideo()">
+<div class="project-image"><img src="images/video.jpg"></div>
+<h3>Video Editing</h3>
+</div>
+
+<div class="project-card" onclick="openGallery('banner')">
+<div class="project-image"><img src="images/banner.jpg"></div>
+<h3>Banner Design</h3>
+</div>
+
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<h2 class="section-title">Contact</h2>
+
+<div class="contact-box">
+<p>Phone: +91 6382436923</p>
+<p>Email: a.farith04@gmail.com</p>
+</div>
+
+</section>
+
+<!-- GALLERY -->
+<div id="galleryModal">
+<span onclick="closeGallery()" style="position:absolute;top:20px;right:40px;font-size:40px;color:white;cursor:pointer;">&times;</span>
+<div id="galleryImages"></div>
+</div>
+
+<!-- VIDEO -->
+<div id="videoModal">
+<span onclick="closeVideo()" style="position:absolute;top:20px;right:40px;font-size:40px;color:white;cursor:pointer;">&times;</span>
+<video id="projectVideo" controls>
+<source src="images/myvideo.mp4" type="video/mp4">
+</video>
+</div>
+
+<script>
+
+/* MOBILE MENU */
+
+const toggle = document.getElementById("menu-toggle");
+const nav = document.getElementById("nav-links");
+const navLinks = document.querySelectorAll("#nav-links a");
+
+toggle.addEventListener("click", () => {
+nav.classList.toggle("active");
+});
+
+/* CLOSE MENU AFTER CLICK */
+
+navLinks.forEach(link => {
+link.addEventListener("click", () => {
+nav.classList.remove("active");
+});
+});
+
+/* Typing Effect */
+
+const words=["Creative Designer","Logo Specialist","Brand Identity Expert","Visual Storyteller"];
+let i=0;
+let j=0;
+let currentWord="";
+let isDeleting=false;
+const typingElement=document.querySelector(".typing");
+
+function typeEffect(){
+currentWord=words[i];
+
+if(isDeleting){
+typingElement.textContent=currentWord.substring(0,j--);
+if(j<0){
+isDeleting=false;
+i=(i+1)%words.length;
+}
+}else{
+typingElement.textContent=currentWord.substring(0,j++);
+if(j>currentWord.length){
+isDeleting=true;
+setTimeout(typeEffect,1000);
+return;
+}
+}
+
+setTimeout(typeEffect,isDeleting?50:100);
+}
+
+typeEffect();
+
+/* Gallery */
+
+const galleries={
+logo:["images/logo1.jpg","images/logo2.jpg"],
+brochure:["images/brochure1.jpg","images/brochure2.jpg"],
+flyer:["images/flyer1.jpg","images/flyer2.jpg"],
+social:["images/post1.jpg","images/post2.jpg"],
+pamphlet:["images/pamphlet1.jpg","images/pamphlet2.jpg"],
+visiting:["images/visiting1.jpg","images/visiting2.jpg"],
+frame:["images/frame1.jpg","images/frame2.jpg"],
+banner:["images/banner1.jpg","images/banner2.jpg"]
+};
+
+function openGallery(type){
+const modal=document.getElementById("galleryModal");
+const container=document.getElementById("galleryImages");
+container.innerHTML="";
+
+galleries[type].forEach(img=>{
+container.innerHTML+=`<img src="${img}">`;
+});
+
+modal.style.display="block";
+}
+
+function closeGallery(){
+document.getElementById("galleryModal").style.display="none";
+}
+
+/* Video */
+
+function openVideo(){
+const modal=document.getElementById("videoModal");
+const video=document.getElementById("projectVideo");
+modal.style.display="flex";
+video.play();
+}
+
+function closeVideo(){
+const modal=document.getElementById("videoModal");
+const video=document.getElementById("projectVideo");
+modal.style.display="none";
+video.pause();
+video.currentTime=0;
+}
+
+</script>
+
+</body>
+</html>
+```
